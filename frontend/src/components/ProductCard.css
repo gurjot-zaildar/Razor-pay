@@ -1,0 +1,21 @@
+.rp-card{
+  width:320px;
+  border-radius:14px;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(249,249,251,0.9));
+  box-shadow: 0 8px 30px rgba(16,24,40,0.12);
+  transition:transform .22s ease, box-shadow .22s ease;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+.rp-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(16,24,40,0.16)}
+.rp-media{height:200px;overflow:hidden;background:#eee}
+.rp-media img{width:100%;height:100%;object-fit:cover;display:block}
+.rp-body{padding:16px}
+.rp-title{margin:0 0 6px;font-size:18px;color:#0f172a}
+.rp-desc{margin:0 0 12px;color:#475569;font-size:13px;line-height:1.35;min-height:38px}
+.rp-footer{display:flex;align-items:center;justify-content:space-between}
+.rp-price{font-weight:700;color:#0b5; color:#0f5132}
+.rp-buy{background:linear-gradient(90deg,#7c3aed,#06b6d4);border:none;color:white;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(99,102,241,0.18);transition:transform .15s ease}
+.rp-buy:hover{transform:translateY(-2px)}
+
+@media (max-width:420px){.rp-card{width:100%}}
