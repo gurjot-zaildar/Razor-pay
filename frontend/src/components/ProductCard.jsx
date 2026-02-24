@@ -1,5 +1,6 @@
 import React from 'react'
 import '../components/ProductCard.css'
+import PaymentButton from './PaymentButton'
 
 function formatPrice(amount, currency) {
   const value = Number(amount) / 100
@@ -27,12 +28,9 @@ const ProductCard = ({ product, onBuy }) => {
 
         <div className="rp-footer">
           <div className="rp-price">{formatPrice(price.amount, price.currency)}</div>
-          <button
-            className="rp-buy"
-            onClick={() => (onBuy ? onBuy(product) : alert(`Buy now: ${title}`))}
-          >
-            Buy now
-          </button>
+         
+            <PaymentButton/>
+        
         </div>
       </div>
     </div>

@@ -71,7 +71,8 @@ const paymentSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: 'pending',
+    default: 'PENDING',
+    enum:["PENDING","COMPLETED","FAILED"]
   },
 }, { timestamps: true });
 
@@ -128,9 +129,9 @@ router.post('/create/orderId', async (req, res) => {
   };
   try {
     const order = await razorpay.orders.create(options);
-    res.send(order);
+    res.status(201).json(order);
 
-    const newPayment = await Payment.create({
+    const newPayment = await PaymentModel.create({
       orderId: order.id,
       amount: order.amount,
       currency: order.currency,
@@ -226,14 +227,14 @@ router.post('/api/payment/verify', async (req, res) => {
   const secret = process.env.RAZORPAY_KEY_SECRET
 
   try {
-    const { validatePaymentVerification } = require('../node_modules/razorpay/dist/utils/razorpay-utils.js')
+    const { validatePaymentVerification } = require('../../node_modules/razorpay/dist/utils/razorpay-utils.js')
 
     const result = validatePaymentVerification({ "order_id": razorpayOrderId, "payment_id": razorpayPaymentId }, signature, secret);
     if (result) {
-      const payment = await Payment.findOne({ orderId: razorpayOrderId });
+      const payment = await paymentModel.findOne({ orderId: razorpayOrderId });
       payment.paymentId = razorpayPaymentId;
       payment.signature = signature;
-      payment.status = 'completed';
+      payment.status = 'COMPLETED';
       await payment.save();
       res.json({ status: 'success' });
     } else {

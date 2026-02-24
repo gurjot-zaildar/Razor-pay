@@ -1,6 +1,7 @@
 const express = require("express")
 const connectDB = require("./db/db")
 const productRoutes = require("./routes/product.routes")
+const paymentRoutes = require("./routes/payment.routes")
 const cors = require("cors")
 
 const app = express()
@@ -10,5 +11,6 @@ connectDB()
 app.use(express.json())
 
 app.use("/api/products",productRoutes)
+app.use("/api/payment",paymentRoutes)
 
 module.exports = app
